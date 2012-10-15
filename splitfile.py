@@ -7,5 +7,13 @@ try:
 except IOError:
 	print("read error")
 	sys.exit()
+
 s_orig = file_orig.read();
+file_orig.close();
+s_len = len(s_orig)
+con = True
+
+while (con):
+	
+
 
