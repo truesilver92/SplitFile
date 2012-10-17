@@ -1,4 +1,5 @@
 import sys
+import math
 
 q = raw_input("name of file:");
 
@@ -16,13 +17,22 @@ step = 4096
 begin = 0
 end = 0
 filecount = 1
+digets = math.ceil(math.log10(s_len / step + 1))
 
 while (con):
 	end = end + step
 	if (end > s_len - 1):
 		end = s_len - 1
 		con = False
-	f = open(str(filecount) + '_' + q, 'w', 4096)	
+	
+	addstring = str(filecount)
+	addstringlen = len(addstring)
+
+	while addstringlen < digets:
+		addstring = '0' + addstring
+		addstringlen = addstringlen + 1
+
+	f = open(addstring + '_' + q, 'w', 4096)	
 	s = s_orig[begin:end]
 	
 	f.write(s)
