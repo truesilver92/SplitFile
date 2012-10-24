@@ -1,7 +1,9 @@
 import sys
 import math
 
-q = raw_input("name of file:");
+q = sys.argv[1]
+
+print q
 
 try:
 	file_orig = open(q, "r")
