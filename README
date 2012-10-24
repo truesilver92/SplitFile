@@ -1,5 +1,5 @@
 What SplitFile exists for:
-	It exists to make small pieces of a larger file
+	It exists to make small pieces of a larger file.
 
 What SplitFile does:
 	Takes a text file and outputs 4096 byte pieces of that text file each with the name "[number]_[original file name]"
