@@ -1,7 +1,35 @@
 import sys
 import math
+import os
 
-q = sys.argv[1]
+#This is the interpretation of the command line
+
+if len(sys.argv) > 2:
+	#Combine mode instead of split mode
+	print "Combine mode"
+	c = sys.argv[2]
+	print "Seed file: " + c
+	if int(c[0]) == 1:
+		print "c[0] == 1 is true"
+		continuebool = True
+		currentfilecount = 1
+		rawfilename = c[2:]
+		print "rawfilename = " + rawfilename
+		f = open(rawfilename, 'w')
+		
+		while continuebool:
+			temp = open(str(currentfilecount) + '_' + rawfilename, 'r')
+			currentfilecount = currentfilecount + 1
+			f.write(temp.read())
+			temp.close()
+			if not(os.path.exists(str (currentfilecount) + '_' + rawfilename)):
+				continuebool = False
+	#End the program after Combination mode
+	sys.exit()
+	
+else:
+	print "Split mode"
+	q = sys.argv[1]
 
 print q
 
@@ -42,7 +70,4 @@ while (con):
 	
 	begin = end
 	filecount = filecount + 1	
-	
-	
-
 
