@@ -1,3 +1,9 @@
+How to use:
+	Split Mode:
+		python splitfile.py [name of file to split]
+	Combine Mode:
+		python splitfile.py c [The first file created from split mode (starts with "1_")]
+
 What SplitFile exists for:
 	It exists to make small pieces of a larger file.
 
