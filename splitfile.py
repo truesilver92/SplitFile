@@ -62,15 +62,18 @@ except IOError:
 	print("read error")
 	sys.exit()
 
-s_orig = file_orig.read();
-file_orig.close();
-s_len = len(s_orig)
+#s_orig = file_orig.read();
+#file_orig.close();
+#s_len = len(s_orig)
+s_len = os.path.getsize(q)
 con = True
 step = 4096
+#4 megabytes for big test
+#step = 4194304
 begin = 0
 end = 0
 filecount = 1
-digets = math.ceil(math.log10(s_len / step + 1))
+digets = int(math.log10(s_len / step)) + 1
 
 while (con):
 	end = end + step
@@ -85,12 +88,14 @@ while (con):
 		addstring = '0' + addstring
 		addstringlen = addstringlen + 1
 
-	f = open(addstring + '_' + q, 'w', 4096)	
-	s = s_orig[begin:end]
+	f = open(addstring + '_' + q, 'w', step)	
+	s = file_orig.read(step)
 	
 	f.write(s)
 	f.close()
 	
 	begin = end
 	filecount = filecount + 1	
+
+file_orig.close()
 
