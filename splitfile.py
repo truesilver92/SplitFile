@@ -67,9 +67,9 @@ except IOError:
 #s_len = len(s_orig)
 s_len = os.path.getsize(q)
 con = True
-#step = 4096
+step = 4096
 #4 megabytes for big test
-step = 4194304
+#step = 4194304
 begin = 0
 end = 0
 filecount = 1
