@@ -1,6 +1,7 @@
 import sys
 import math
 import os
+import string
 
 #This is the interpretation of the command line
 
@@ -9,21 +10,43 @@ if len(sys.argv) > 2:
 	print "Combine mode"
 	c = sys.argv[2]
 	print "Seed file: " + c
-	if int(c[0]) == 1:
-		print "c[0] == 1 is true"
-		continuebool = True
-		currentfilecount = 1
-		rawfilename = c[2:]
-		print "rawfilename = " + rawfilename
-		f = open(rawfilename, 'w')
+	
+	continuebool = True
+	currentfilecount = 1
+	#fix rawfilename to find after the number for the part		
+	#find identifyer "_" and cut the string for the name		
+	rawfilename = c[string.find(c, "_") + 1:]
+	#get number of parts	
+	totalfilecount = int(c[:string.find(c, "_")])
+	#get number of digits from totalfilecount
+	digits = int(math.floor(math.log10(totalfilecount))) + 1
+	print "rawfilename = " + rawfilename
+	f = open(rawfilename, 'w')
+	
+	while continuebool:
+		#get the part name correct			
+		numberofzerostoadd = digits - (int(math.floor(math.log10(currentfilecount))) + 1)
+		digitoffset = ""
+
+		while numberofzerostoadd > 0:
+			digitoffset = digitoffset + "0"
+			numberofzerostoadd = numberofzerostoadd - 1
+
+		temp = open(digitoffset + str(currentfilecount) + '_' + rawfilename, 'r')
+		currentfilecount = currentfilecount + 1
+		f.write(temp.read())
+		temp.close()
 		
-		while continuebool:
-			temp = open(str(currentfilecount) + '_' + rawfilename, 'r')
-			currentfilecount = currentfilecount + 1
-			f.write(temp.read())
-			temp.close()
-			if not(os.path.exists(str (currentfilecount) + '_' + rawfilename)):
-				continuebool = False
+		#get the part name correct			
+		numberofzerostoadd = digits - (int(math.floor(math.log10(currentfilecount))) + 1)
+		digitoffset = ""
+
+		while numberofzerostoadd > 0:
+			digitoffset = digitoffset + "0"
+			numberofzerostoadd = numberofzerostoadd - 1			
+
+		if not(os.path.exists(digitoffset + str(currentfilecount) + '_' + rawfilename)):
+			continuebool = False
 	#End the program after Combination mode
 	sys.exit()
 	
