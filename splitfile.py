@@ -5,7 +5,7 @@ import string
 
 #This is the interpretation of the command line
 
-if len(sys.argv) > 2:
+if sys.argv[1] == 'c':
 	#Combine mode instead of split mode
 	print "Combine mode"
 	c = sys.argv[2]
@@ -52,7 +52,7 @@ if len(sys.argv) > 2:
 	
 else:
 	print "Split mode"
-	q = sys.argv[1]
+	q = sys.argv[2]
 
 print q
 
@@ -67,7 +67,7 @@ except IOError:
 #s_len = len(s_orig)
 s_len = os.path.getsize(q)
 con = True
-step = 4096
+step = int(sys.argv[1])
 #4 megabytes for big test
 #step = 4194304
 begin = 0
