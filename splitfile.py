@@ -3,6 +3,10 @@ import math
 import os
 import string
 
+#A function for printing out progress
+def progressReport(done, toGo, lastFinishedFile):
+	print str(done) + " of " + str(toGo) + " completed " + lastFinishedFile
+
 #This is the interpretation of the command line
 
 if sys.argv[1] == 'c':
@@ -33,6 +37,7 @@ if sys.argv[1] == 'c':
 			numberofzerostoadd = numberofzerostoadd - 1
 
 		temp = open(digitoffset + str(currentfilecount) + '_' + rawfilename, 'r')
+		progressReport(currentfilecount, totalfilecount, temp.name)
 		currentfilecount = currentfilecount + 1
 		f.write(temp.read())
 		temp.close()
@@ -74,6 +79,7 @@ begin = 0
 end = 0
 filecount = 1
 digets = int(math.log10(s_len / step)) + 1
+totalfiles = int(s_len / step) + 1
 
 while (con):
 	end = end + step
@@ -88,12 +94,16 @@ while (con):
 		addstring = '0' + addstring
 		addstringlen = addstringlen + 1
 
-	f = open(addstring + '_' + q, 'w', step)	
+	temp = addstring + '_' + q
+
+	f = open(temp, 'w', step)	
 	s = file_orig.read(step)
 	
 	f.write(s)
 	f.close()
 	
+	progressReport(filecount, totalfiles, temp)
+
 	begin = end
 	filecount = filecount + 1	
 
